@@ -2313,3 +2313,89 @@ button:focus-visible {
     transition: none !important;
   }
 }
+
+
+/* ==========================================================
+   Employee Portal: light-mode-only accessibility/contrast
+   ========================================================== */
+:root {
+  color-scheme: light !important;
+  --color-text-main: #172b24;
+  --color-text-muted: #52665d;
+  --color-surface: #ffffff;
+  --color-surface-subtle: #f5f8f7;
+  --color-border: #d7e2dc;
+}
+
+/* Login/activation branding: the sidebar's white logo rule must
+   not make the logo disappear on a white authentication card. */
+.login-page .brand b,
+.login-card .brand b,
+.login-page .login-brand b,
+.login-card .login-brand b,
+.login-page .brand-name,
+.login-card .brand-name {
+  color: #173d30 !important;
+  opacity: 1 !important;
+}
+.login-page .brand small,
+.login-card .brand small,
+.login-page .login-brand small,
+.login-card .login-brand small {
+  color: #64796f !important;
+  opacity: 1 !important;
+}
+
+/* Ensure text and controls stay readable on the light surfaces. */
+body, #root {
+  color: #172b24;
+  color-scheme: light;
+}
+input, select, textarea {
+  color: #24372f;
+  background-color: #ffffff;
+}
+input::placeholder, textarea::placeholder {
+  color: #718278;
+  opacity: 1;
+}
+select option {
+  color: #24372f;
+  background: #ffffff;
+}
+label, .form-label, .field-label {
+  color: #40564b;
+}
+.auth-error, .error-message {
+  color: #b42318;
+}
+.success-banner, .success-message {
+  color: #166534;
+}
+
+/* Profile/identity text on pale cards. */
+.sidebar-profile b,
+.sidebar-profile small,
+.employee-profile-card b,
+.employee-profile-card small,
+.portal-user-chip b,
+.portal-user-chip small {
+  opacity: 1;
+}
+.sidebar-profile b,
+.employee-profile-card b,
+.portal-user-chip b {
+  color: #172b24;
+}
+.sidebar-profile small,
+.employee-profile-card small,
+.portal-user-chip small {
+  color: #52665d;
+}
+
+/* Remove any inherited dark-theme filter/opacity from the employee UI. */
+:root[data-theme="light"] body,
+:root[data-theme="light"] #root {
+  filter: none;
+  opacity: 1;
+}

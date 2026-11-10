@@ -2398,9 +2398,9 @@ label, .form-label, .field-label {
 :root[data-theme="light"] #root {
   filter: none;
   opacity: 1;
-=======
+}
+
 /* Employee Portal is intentionally light-mode only. */
 :root {
   color-scheme: light !important;
->>>>>>> 2073e73aeacce7233e1fd4bb66b8ffc88619ff15
 }

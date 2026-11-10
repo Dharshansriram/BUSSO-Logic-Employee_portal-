@@ -9,9 +9,8 @@ import EmployeePortal from "./portal/EmployeePortal.jsx";
 export default function App() {
   const [employee, setEmployee] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState(getSavedTheme);
 
-  // Apply the selected theme to the whole application.
+  // Employee Portal is light-mode only.
   useEffect(() => {
     document.documentElement.dataset.theme = "light";
     document.documentElement.style.colorScheme = "light";

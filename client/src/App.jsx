@@ -9,14 +9,16 @@ import EmployeePortal from "./portal/EmployeePortal.jsx";
 export default function App() {
   const [employee, setEmployee] = useState(null);
   const [loading, setLoading] = useState(true);
-  // Employee Portal is light-mode only.
+  const [theme, setTheme] = useState(getSavedTheme);
+
+  // Apply the selected theme to the whole application.
   useEffect(() => {
     document.documentElement.dataset.theme = "light";
     document.documentElement.style.colorScheme = "light";
     try {
       localStorage.removeItem("bussologic-theme");
     } catch {
-      // Light mode remains active even when storage is unavailable.
+      // The theme still works if browser storage is unavailable.
     }
   }, []);
 

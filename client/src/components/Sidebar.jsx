@@ -26,7 +26,12 @@ export default function Sidebar({
         <span className="workspace-dot" />
         {portalLabel}
       </div>
+<<<<<<< HEAD
 <nav>
+=======
+
+      <nav>
+>>>>>>> 2073e73aeacce7233e1fd4bb66b8ffc88619ff15
         {items.map(item => (
           <button
             type="button"

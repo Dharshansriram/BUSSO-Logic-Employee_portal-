@@ -361,8 +361,6 @@ function MyProfile({ employee }) {
 export default function EmployeePortal({
   employee,
   logout,
-  theme,
-  onToggleTheme,
 }) {
   const [view, setView] = useState("Tasks");
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -385,8 +383,6 @@ export default function EmployeePortal({
   logout={logout}
   items={EMPLOYEE_NAV}
   portalLabel="Employee Portal"
-  theme={theme}
-  onToggleTheme={onToggleTheme}
 />
 <main className="main-content">
         <header className="portal-header">

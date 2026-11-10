@@ -2313,3 +2313,9 @@ button:focus-visible {
     transition: none !important;
   }
 }
+
+
+/* Employee Portal is intentionally light-mode only. */
+:root {
+  color-scheme: light !important;
+}

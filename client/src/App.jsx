@@ -6,37 +6,19 @@ import Login from "./pages/Login.jsx";
 import Activate from "./pages/Activate.jsx";
 import EmployeePortal from "./portal/EmployeePortal.jsx";
 
-function getSavedTheme() {
-  try {
-    const saved = localStorage.getItem("bussologic-theme");
-
-    if (saved === "dark" || saved === "light") {
-      return saved;
-    }
-
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  } catch {
-    return "light";
-  }
-}
-
 export default function App() {
   const [employee, setEmployee] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState(getSavedTheme);
-
-  // Apply the selected theme to the whole application.
+  // Employee Portal uses a consistent light appearance.
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-
+    document.documentElement.dataset.theme = "light";
+    document.documentElement.style.colorScheme = "light";
     try {
-      localStorage.setItem("bussologic-theme", theme);
+      localStorage.removeItem("bussologic-theme");
     } catch {
-      // The theme still works if browser storage is unavailable.
+      // The portal remains in light mode if storage is unavailable.
     }
-  }, [theme]);
+  }, []);
 
   useEffect(() => {
     api
@@ -56,9 +38,6 @@ export default function App() {
     setEmployee(null);
   };
 
-  const toggleTheme = () => {
-    setTheme(current => current === "dark" ? "light" : "dark");
-  };
 
   if (window.location.pathname === "/activate") {
     return <Activate />;
@@ -81,8 +60,6 @@ export default function App() {
     <EmployeePortal
       employee={employee}
       logout={logout}
-      theme={theme}
-      onToggleTheme={toggleTheme}
     />
   );
 }

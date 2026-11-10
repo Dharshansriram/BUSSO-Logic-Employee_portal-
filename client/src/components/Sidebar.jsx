@@ -7,8 +7,6 @@ export default function Sidebar({
   logout,
   items = [],
   portalLabel = "Operations Intelligence",
-  theme = "light",
-  onToggleTheme,
 }) {
   const userInitials = employee?.name
     ? employee.name.split(" ").map(p => p[0]).join("").slice(0, 2)
@@ -28,26 +26,6 @@ export default function Sidebar({
         <span className="workspace-dot" />
         {portalLabel}
       </div>
-      
-<button
-  type="button"
-  className="theme-toggle"
-  onClick={onToggleTheme}
-  aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
-  aria-pressed={theme === "dark"}
->
-  <span className="theme-toggle-icon" aria-hidden="true">
-    {theme === "dark" ? "☀" : "☾"}
-  </span>
-
-  <span>
-    {theme === "dark" ? "Light appearance" : "Dark appearance"}
-  </span>
-
-  <span className="theme-toggle-state">
-    {theme === "dark" ? "ON" : "OFF"}
-  </span>
-</button>
 
       <nav>
         {items.map(item => (

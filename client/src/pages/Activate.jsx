@@ -47,11 +47,11 @@ export default function Activate() {
           <h1>Welcome, {info.name}</h1>
           <p>Choose a password to activate your {info.company} account.</p>
           {error && <div className="auth-error">{error}</div>}
-          <form onSubmit={submit}>
-            <label>New password<input type="password" required minLength={10} autoComplete="new-password" value={password} onChange={e => setPassword(e.target.value)} /></label>
-            <label>Confirm password<input type="password" required minLength={10} autoComplete="new-password" value={confirm} onChange={e => setConfirm(e.target.value)} /></label>
-            <small>At least 10 characters, with letters and a number.</small>
-            <button className="primary-button full" disabled={loading}>{loading ? "Activating…" : "Activate account"}</button>
+          <form className="activation-form" onSubmit={submit}>
+            <label className="activation-field">New password<input className="activation-input" type="password" required minLength={10} autoComplete="new-password" value={password} onChange={e => setPassword(e.target.value)} /></label>
+            <label className="activation-field">Confirm password<input className="activation-input" type="password" required minLength={10} autoComplete="new-password" value={confirm} onChange={e => setConfirm(e.target.value)} /></label>
+            <small className="activation-hint">At least 10 characters, with letters and a number.</small>
+            <button className="primary-button full activation-submit" disabled={loading}>{loading ? "Activating…" : "Activate account"}</button>
           </form>
         </>)}
         {state === "done" && (<>

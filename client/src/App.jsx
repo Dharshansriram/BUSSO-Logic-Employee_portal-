@@ -1,0 +1,88 @@
+
+import React, { useEffect, useState } from "react";
+import "./bussologic.css";
+import { api } from "./lib/api";
+import Login from "./pages/Login.jsx";
+import Activate from "./pages/Activate.jsx";
+import EmployeePortal from "./portal/EmployeePortal.jsx";
+
+function getSavedTheme() {
+  try {
+    const saved = localStorage.getItem("bussologic-theme");
+
+    if (saved === "dark" || saved === "light") {
+      return saved;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  } catch {
+    return "light";
+  }
+}
+
+export default function App() {
+  const [employee, setEmployee] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState(getSavedTheme);
+
+  // Apply the selected theme to the whole application.
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+
+    try {
+      localStorage.setItem("bussologic-theme", theme);
+    } catch {
+      // The theme still works if browser storage is unavailable.
+    }
+  }, [theme]);
+
+  useEffect(() => {
+    api
+      .getMe()
+      .then(r => setEmployee(r.employee))
+      .catch(() => setEmployee(null))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const logout = async () => {
+    try {
+      await api.logout();
+    } catch {
+      // Preserve existing logout behavior.
+    }
+
+    setEmployee(null);
+  };
+
+  const toggleTheme = () => {
+    setTheme(current => current === "dark" ? "light" : "dark");
+  };
+
+  if (window.location.pathname === "/activate") {
+    return <Activate />;
+  }
+
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="brand-mark">BL</div>
+        <span>Loading your workspace…</span>
+      </div>
+    );
+  }
+
+  if (!employee) {
+    return <Login onLoginSuccess={setEmployee} />;
+  }
+
+  return (
+    <EmployeePortal
+      employee={employee}
+      logout={logout}
+      theme={theme}
+      onToggleTheme={toggleTheme}
+    />
+  );
+}
